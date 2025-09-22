@@ -426,16 +426,17 @@
 
         const res = await fetch(scriptURL);
         const data = await res.json();
-        allData = data.map(d => {
-          return {
-            Timestamp: formatDate(d.Timestamp),
-            Nama: d.Nama,
-            "Kode Siswa": d["Kode Siswa"],
-            Kelas: d.Kelas,
-            Tipe: d.Tipe,
-            Status: d.Status
-          };
-        });
+   
+allData = data.map(d => {
+  return {
+    Timestamp: formatDate(d.Timestamp),
+    Nama: d.Nama || d.nama || "",
+    "Kode Siswa": d["Kode Siswa"] || d.Kode_Siswa || d.NIS || d.nis || "",
+    Kelas: d.Kelas || d.kelas || "",
+    Tipe: d.Tipe || d.tipe || "",
+    Status: d.Status || d.status || ""
+  };
+});        
         filteredData = [...allData];
         displayTable();
       } catch (error) {
@@ -578,5 +579,6 @@
 </body>
 
 </html>
+
 
 
